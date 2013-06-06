@@ -11,13 +11,14 @@ Playgrub.source.error = 'Sorry, no tracks were found.';
 Playgrub.source.scrape = function() {
 	var track, artist, song;
 
-    $("#table_tracklist").find("tr").each(function() {
+    $("#table_tracklist tbody tr").each(function() {
         track = $(this);
 
         artist = track.find(".artist").text();
         song = track.find(".song").text();
 
         if (artist && song) {
+        	console.log([artist, song]);
             Playgrub.playlist.add_track(artist, song);
         }
     });
