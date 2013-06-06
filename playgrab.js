@@ -147,7 +147,7 @@ Playgrab = {
 		}
 	},
 	addScraper: function(domain) {
-		var link = "<scrip"+"t src='https://raw.github.com/sydlawrence/tomahawklet/master/scrapers/"+domain+".js'><"+"/script>";
+		var link = "<scrip"+"t src='//git.macropus.org/tomahawklet/scrapers/"+domain+".js'><"+"/script>";
 		$('body').append(link);
 	},
 	playlist: {
@@ -197,7 +197,7 @@ Playgrab = {
 		  top:0
 		});
 
-		var logo = $("<img src='//git.macropus.org/tomahawklet/tomahk_logo.png'/>");
+		var logo = $("<img src='//git.macropus.org/tomahawklet/images/tomahk_logo.png'/>");
 		logo.css({
             height:20,
             border:"none",
@@ -341,7 +341,7 @@ Playgrab = {
 	generateForm: function() {
 		this.form = $("<form method='post' target='_blank' action='http://toma.hk/playlistgen.php'/>");
 		this.form.append("<input type='hidden' name='title' value='"+window.document.title+"' />");
-		this.form.append("<input type='image' height=20 style='border:none;padding:0;margin:0;width:20px;height:20px;' src='//git.macropus.org/tomahawklet/playlist-icon.png' alt='Create a playlist from this page' title='Create a playlist from this page' />");
+		this.form.append("<input type='image' height=20 style='border:none;padding:0;margin:0;width:20px;height:20px;' src='//git.macropus.org/tomahawklet/images/playlist-icon.png' alt='Create a playlist from this page' title='Create a playlist from this page' />");
 
 		this.form.append("<input type='hidden' name='save' value='true' />");
 		this.form.append("<input type='hidden' name='redirect' value='true' />");
@@ -383,7 +383,7 @@ Playgrab = {
 
 		this.loading.remove();
 
-		var placeholder = $("<img src='//git.macropus.org/tomahawklet/placeholder.png'/>");
+		var placeholder = $("<img src='//git.macropus.org/tomahawklet/images/placeholder.png'/>");
 		placeholder.css({
 			position:"absolute",
 			top:0,
@@ -434,7 +434,7 @@ Playgrab = {
 			e.preventDefault();
 			$('.tomahk-iframe, .iframe-tomahk').remove();
 			var iframe = $("<iframe class='iframe-tomahk' scrolling='no' style='border:none;position:fixed;top:30px;left:0;z-index:9999999;background:#000;opacity:0' class='tomahk-iframe' width=278 height=278 src='http://"+domain+"/embed.php?artist="+escape(artist)+"&title="+escape(title)+"&autoplay=true'></iframe>");
-			var iframeLoading = $("<img src='//git.macropus.org/tomahawklet/placeholder.png'/>");
+			var iframeLoading = $("<img src='//git.macropus.org/tomahawklet/images/placeholder.png'/>");
 			iframeLoading.css({
 				position:"fixed",
 				top:"30px",
@@ -445,7 +445,7 @@ Playgrab = {
 				height:278,
 				zIndex:9999,
 			});
-			var iframeLoadingImage = $("<img src='//git.macropus.org/tomahawklet/loading.gif'/>");
+			var iframeLoadingImage = $("<img src='//git.macropus.org/tomahawklet/images/loading.gif'/>");
 			iframeLoadingImage.css({
 				position:"fixed",
 				top:154,
