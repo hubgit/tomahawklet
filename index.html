@@ -1,4 +1,11 @@
 <h1>Tomahawklet</h1>
 
 <p>Drag this to your bookmark bar:
-<a href="javascript:var script=document.createElement('script');script.setAttribute('id','tomahawklet-loader');script.src='//git.macropus.org/tomahawklet/playgrab.js';document.getElementsByTagName('head')[0].appendChild(script);">Tomahawklet</a></p>
+<a id="bookmarklet" href="javascript:var script=document.createElement('script');script.setAttribute('id','tomahawklet-loader');script.src='__SELF__/playgrab.js';document.getElementsByTagName('head')[0].appendChild(script);">Tomahawklet</a></p>
+
+<script>
+	var selfURL = window.location.href.replace(/\/[^\/]*$/, "");
+	var bookmarklet = document.getElementById("bookmarklet");
+	var code = bookmarklet.getAttribute("href").replace("__SELF__", selfURL);
+	bookmarklet.setAttribute("href", code);
+</script>

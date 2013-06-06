@@ -3,8 +3,6 @@ var SCRAPERS = [
 	'default',
 	'spotembeds',
 	'soundcloudembed',
-
-
 	'8tracks.com',
 	'22tracks.com',
 	'absoluteradio.co.uk',
@@ -73,35 +71,21 @@ var SCRAPERS = [
 	'youtube.com'
 ];
 
-var domain = "toma.hk";
 var selfURL = document.getElementById("tomahawklet-loader").getAttribute("src").replace(/\/[^\/]*$/, "");
 
-var Playgrab;
-
-
-
 var getAlbumInfo = function(artist, title, callback) {
-	artist = encodeURIComponent(artist);
-	title = encodeURIComponent(title);
-
-	var url = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=b25b959554ed76058ac220b7b2e0a026&artist="+artist+"&album="+title+"&format=json";
-	console.log(artist);
-	console.log(title);
-	console.log(url);
-	$.getJSON(url,callback);
+	$.ajax({
+		url: "http://ws.audioscrobbler.com/2.0/",
+		data: { method: "album.getinfo", api_key: "b25b959554ed76058ac220b7b2e0a026", artist: artist, album: title, format: "json" },
+		dataType: "json",
+		success: callback
+	});
 }
 
-
-Playgrab = {
+var Playgrab = {
+	open:true,
 	insertAddButton: function(element,artist, title ) {
 		this.displayTrack(artist, title);
-	},
-	open:true,
-	savePlaylist: function() {
-
-	},
-	retreivePlaylist: function() {
-
 	},
 	checkUrl: function(url) {
 		if (url === "*") return true;
@@ -336,8 +320,6 @@ Playgrab = {
 	},
 	rendered:{},
 	form:undefined,
-            //http://toma.hk/playlistgen.php?title={PLAYLIST_TITLE}&artists[]={ARTIST_ONE}&titles[]={TITLE_ONE}&artists[]={ARTIST_TWO}&titles[]={TITLE_TWO}
-
 	generateForm: function() {
 		this.form = $("<form/>", { method: "post", target: "_blank", action: "http://toma.hk/playlistgen.php" });
 
@@ -429,7 +411,7 @@ Playgrab = {
 		li.find('a').click(function(e) {
 			e.preventDefault();
 			$('.tomahk-iframe, .iframe-tomahk').remove();
-			var iframe = $("<iframe class='iframe-tomahk' scrolling='no' style='border:none;position:fixed;top:30px;left:0;z-index:9999999;background:#000;opacity:0' class='tomahk-iframe' width=278 height=278 src='http://"+domain+"/embed.php?artist="+escape(artist)+"&title="+escape(title)+"&autoplay=true'></iframe>");
+			var iframe = $("<iframe class='iframe-tomahk' scrolling='no' style='border:none;position:fixed;top:30px;left:0;z-index:9999999;background:#000;opacity:0' class='tomahk-iframe' width=278 height=278 src='http://toma.hk/embed.php?artist="+escape(artist)+"&title="+escape(title)+"&autoplay=true'></iframe>");
 			var iframeLoading = $("<img/>", { src: selfURL + "/images/placeholder.png" });
 			iframeLoading.css({
 				position:"fixed",
@@ -523,41 +505,30 @@ Playgrab = {
 
 var Playgrub = Playgrab;
 
-
-
-
-
-
+var script = document.createElement('script');
+script.src = 'http://toma.hk/js/classes/Artist.js';
+document.getElementsByTagName('head')[0].appendChild(script);
 
 var script = document.createElement('script');
-script.type = 'text/javascript';
+script.src = 'http://toma.hk/js/classes/Track.js';
 document.getElementsByTagName('head')[0].appendChild(script);
-script.src = 'http://'+domain+'/js/classes/Artist.js';
 
 var script = document.createElement('script');
-script.type = 'text/javascript';
+script.src = 'http://toma.hk/js/classes/Album.js';
 document.getElementsByTagName('head')[0].appendChild(script);
-script.src = 'http://'+domain+'/js/classes/Track.js';
 
 var script = document.createElement('script');
-script.type = 'text/javascript';
-document.getElementsByTagName('head')[0].appendChild(script);
-script.src = 'http://'+domain+'/js/classes/Album.js';
-
-var script = document.createElement('script');
-script.type = 'text/javascript';
-document.getElementsByTagName('head')[0].appendChild(script);
+script.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js';
 
 script.onload = function() {
 	var t = setTimeout(function() {
 		Playgrub.init();
 		var script = document.createElement('script');
-		script.type = 'text/javascript';
 		document.getElementsByTagName('head')[0].appendChild(script);
-		script.src = 'http://'+domain+'/js/bootstrap/bootstrap-tooltip.js';
+		script.src = 'http://toma.hk/js/bootstrap/bootstrap-tooltip.js';
 		script.onload = function() {
 			$('li.cover').tooltip();
 		}
-	},500);
+	}, 500);
 }
-script.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js';
+document.getElementsByTagName('head')[0].appendChild(script);
