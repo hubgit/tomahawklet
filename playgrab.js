@@ -74,7 +74,7 @@ var SCRAPERS = [
 ];
 
 var domain = "toma.hk";
-
+var selfURL = document.getElementById("tomahawklet-loader").getAttribute("src").replace(/\/[^\/]*$/, "");
 
 var Playgrab;
 
@@ -148,8 +148,7 @@ Playgrab = {
 		}
 	},
 	addScraper: function(domain) {
-		var link = "<scrip"+"t src='//git.macropus.org/tomahawklet/scrapers/"+domain+".js'><"+"/script>";
-		$('body').append(link);
+		$("<script/>", { src: selfURL + "/scrapers/" + domain + ".js" }).appendTo("body");
 	},
 	playlist: {
 		title: "",
@@ -198,7 +197,7 @@ Playgrab = {
 		  top:0
 		});
 
-		var logo = $("<img src='//git.macropus.org/tomahawklet/images/tomahk_logo.png'/>");
+		var logo = $("<img/>", { src: selfURL + "/images/tomahk_logo.png" });
 		logo.css({
             height:20,
             border:"none",
@@ -340,24 +339,21 @@ Playgrab = {
             //http://toma.hk/playlistgen.php?title={PLAYLIST_TITLE}&artists[]={ARTIST_ONE}&titles[]={TITLE_ONE}&artists[]={ARTIST_TWO}&titles[]={TITLE_TWO}
 
 	generateForm: function() {
-		this.form = $("<form method='post' target='_blank' action='http://toma.hk/playlistgen.php'/>");
-		this.form.append("<input type='hidden' name='title' value='"+window.document.title+"' />");
-		this.form.append("<input type='image' height=20 style='border:none;padding:0;margin:0;width:20px;height:20px;' src='//git.macropus.org/tomahawklet/images/playlist-icon.png' alt='Create a playlist from this page' title='Create a playlist from this page' />");
+		this.form = $("<form/>", { method: "post", target: "_blank", action: "http://toma.hk/playlistgen.php" });
 
-		this.form.append("<input type='hidden' name='save' value='true' />");
-		this.form.append("<input type='hidden' name='redirect' value='true' />");
+		$("<input", { type: "hidden", name: "title" }).val(window.document.title).appendTo(this.form);
+		$("<input", { type: "hidden", name: "save" }).val("true").appendTo(this.form);
+		$("<input", { type: "hidden", name: "redirect" }).val("true").appendTo(this.form);
 
+		$("<input/>", { type: "image", height: 20, style: "border:none;padding:0;margin:0;width:20px;height:20px;", src: selfURL + "/images/playlist-icon.png", alt: "Create a playlist from this page", title: "Create a playlist from this page" }).appendTo(this.form);
 
 		for ( i in this.rendered) {
 			var obj = this.rendered[i];
-			this.form.append("<input type='hidden' name='artists[]' value='"+obj.artist+"' />");
-			this.form.append("<input type='hidden' name='titles[]' value='"+obj.title+"' />");
-
+			$("<input", { type: "hidden", name: "artists[]" }).val(obj.artist).appendTo(this.form);
+			$("<input", { type: "hidden", name: "titles[]" }).val(obj.title).appendTo(this.form);
 		}
 
-
 		return this.form;
-
 
 	},
 	displayTrack: function(artist, title) {
@@ -368,9 +364,8 @@ Playgrab = {
 		if (this.rendered[artist+title]) return;
 		this.rendered[artist+title] = {artist:artist, title:title};
 
-		this.form.append("<input type='hidden' name='artists[]' value='"+artist+"' />");
-		this.form.append("<input type='hidden' name='titles[]' value='"+title+"' />");
-
+		$("<input", { type: "hidden", name: "artists[]" }).val(artist).appendTo(this.form);
+		$("<input", { type: "hidden", name: "titles[]" }).val(title).appendTo(this.form);
 
 		var track = new Track({
 			title:title,
@@ -384,7 +379,7 @@ Playgrab = {
 
 		this.loading.remove();
 
-		var placeholder = $("<img src='//git.macropus.org/tomahawklet/images/placeholder.png'/>");
+		var placeholder = $("<img/>", { src: selfURL + "/images/placeholder.png" });
 		placeholder.css({
 			position:"absolute",
 			top:0,
@@ -435,7 +430,7 @@ Playgrab = {
 			e.preventDefault();
 			$('.tomahk-iframe, .iframe-tomahk').remove();
 			var iframe = $("<iframe class='iframe-tomahk' scrolling='no' style='border:none;position:fixed;top:30px;left:0;z-index:9999999;background:#000;opacity:0' class='tomahk-iframe' width=278 height=278 src='http://"+domain+"/embed.php?artist="+escape(artist)+"&title="+escape(title)+"&autoplay=true'></iframe>");
-			var iframeLoading = $("<img src='//git.macropus.org/tomahawklet/images/placeholder.png'/>");
+			var iframeLoading = $("<img/>", { src: selfURL + "/images/placeholder.png" });
 			iframeLoading.css({
 				position:"fixed",
 				top:"30px",
@@ -446,7 +441,7 @@ Playgrab = {
 				height:278,
 				zIndex:9999,
 			});
-			var iframeLoadingImage = $("<img src='//git.macropus.org/tomahawklet/images/loading.gif'/>");
+			var iframeLoadingImage = $("<img/>", { src: selfURL + "/images/loading.gif" });
 			iframeLoadingImage.css({
 				position:"fixed",
 				top:154,
