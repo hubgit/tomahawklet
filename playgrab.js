@@ -1,17 +1,17 @@
 var SCRAPERS = [
-	'rdf',	
+	'rdf',
 	'default',
 	'spotembeds',
 	'soundcloudembed',
 
 
-	'8tracks.com',	
+	'8tracks.com',
 	'22tracks.com',
-	'absoluteradio.co.uk',	
-	'amazon.com',	
-	'amazon.co.uk',	
+	'absoluteradio.co.uk',
+	'amazon.com',
+	'amazon.co.uk',
 	'apple.com',
-	'bbc.co.uk',	
+	'bbc.co.uk',
 	'billboard.com',
 	'blip.fm',
 	'deezer.com',
@@ -137,7 +137,7 @@ Playgrab = {
             	Playgrab.insertAddButton($(this),artist,title);
 
 			})
-			
+
 
 		},
 		start: function() {
@@ -183,8 +183,8 @@ Playgrab = {
 			fontSize:"13px",
 			fontWeight:"bold"
 		})
-		
-		
+
+
 		var header = $("<header/>");
 		header.css({
 		  background:'#1a1a1a',
@@ -225,9 +225,9 @@ Playgrab = {
             marginLeft:10,
             cursor:"pointer"
         })
-		
+
 		header.append(createPlaylist).append(logo);
-		
+
 		this.element.append(this.loading);
 		this.div = $("<div  style='position:fixed;z-index:999999;width:278px;top:30px;left:0;bottom:0;overflow-y:auto;padding:0px;background:#252727;color:#1a1a1a;border-right:1px solid #ff0000;'/>")
 		this.div.append(this.element);
@@ -273,18 +273,18 @@ Playgrab = {
 						top:100,
 						width:200,
 						height:200
-					});	
+					});
 				}, function() {
 					if (that.open) return;
 					$(this).stop().animate({
 						top:150,
 						width:100,
 						height:100
-					});	
+					});
 				});
 
 
-				
+
 				$('.tomahk-iframe').animate({top:180}).css("font-size", 10).css("line-height","10px");
 			}
 			$('body').animate({paddingLeft:0});
@@ -311,7 +311,7 @@ Playgrab = {
 			header.animate({left:0}, 500, function() {
 				$closer.show();
 			});
-			
+
 			//$(this).hide();
 			$('body').animate({paddingLeft:274}, 500);
 			that.open = true;
@@ -326,7 +326,7 @@ Playgrab = {
 					width:278,
 					height:278
 				})[0].onhover = function(){};
-				
+
 				$('.tomahk-iframe').animate({top:180}).css("font-size", 20).css("line-height","20px");
 			}
 		})
@@ -454,7 +454,7 @@ Playgrab = {
 				left:124,
 				width:31,
 				height:31,
-				
+
 				zIndex:99991,
 			});
 
@@ -486,16 +486,16 @@ Playgrab = {
 				var iframeDoc = iframe[0].contentDocument || iframe[0].contentWindow.document
 				$(iframeDoc).on("songEnded", function() {
 					alert("hi");
-				})	
+				})
 			});
 
 			if (iframe[0].complete) {
 				var iframeDoc = iframe[0].contentDocument || iframe[0].contentWindow.document
 				$(iframeDoc).on("songEnded", function() {
 					alert("hi");
-				})	
+				})
 			}
-			
+
 
 			that.div.animate({top:308});
 			closer.click(function() {
@@ -516,10 +516,10 @@ Playgrab = {
 			var scraper = SCRAPERS[i];
 			var scraperTest = scraper.split(".");
 			if (scraperTest.length === 1) {
-				Playgrab.addScraper(scraper);	
+				Playgrab.addScraper(scraper);
 			}
 			else if (this.checkUrl(scraper)) {
-				Playgrab.addScraper(scraper);	
+				Playgrab.addScraper(scraper);
 			}
 		}
 	}
